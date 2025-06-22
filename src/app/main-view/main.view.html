@@ -1,0 +1,51 @@
+<div class="fit-parent mat-typography" fxLayout="column">
+    <mat-toolbar fxFlex="10">
+       <div class="fit-parent" fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex="15">
+                <img src="assets/images/squlinq_logo.png" class="logo" alt="">
+            </div>
+            <div fxFlex="85">
+                <mat-icon class="theme-primary-color" (click)="drawer.toggle()">menu</mat-icon>
+            </div>
+            <div fxFlex="5">
+                <div>
+                     <mat-icon [matMenuTriggerFor]="settings" class="theme-primary-color" >account_circle</mat-icon>
+                    <mat-menu #settings="matMenu">
+                        <button mat-menu-item>Sign out</button>
+                    </mat-menu>
+                </div>
+                
+            </div>
+       </div>
+    </mat-toolbar>
+   <div fxFlex style="background-color: transparent;">
+    <mat-drawer-container class="fit-parent mat-sidenav">
+        <mat-drawer #drawer class="drawer" mode="side" [opened]="'true'">
+            <div fxLayout="column" fxLayoutAlign="none stretch" class="tab-headers-cont">
+                <div fxLayout="row" fxLayoutAlign="space-between center" class="tab-header" *ngFor="let t of tabHeaders | async" fxFlex="none" [ngClass]="t.className">
+                    <!-- <div style="height: 5em;"></div> -->
+                    <div fxFlex [command]="t.actionComm">
+                        <p class="no-margin">{{t.name}}</p>
+                    </div>
+                    <!-- <div fxFlex [command]="t.actionComm"></div> -->
+                    <div fxFlex="13">
+                        <mat-icon class="no-margin theme-primary-color" *ngIf="t.hasChildren && !expanded(t)" (click)="expandHeader(t)">add</mat-icon>
+                        <mat-icon class="no-margin theme-primary-color" *ngIf="t.hasChildren && expanded(t)" (click)="collapseHeader(t)">remove</mat-icon>
+                    </div>
+
+                </div>
+            </div>
+            
+            
+        </mat-drawer>
+        <div fxLayout="column" class="fit-parent" style="background-color: transparent;">
+            <router-outlet></router-outlet>
+        </div>
+
+    </mat-drawer-container>
+
+   </div>
+   
+  
+   
+</div>

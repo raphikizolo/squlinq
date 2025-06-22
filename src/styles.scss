@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+
+.theme-typography {
+    font-family: var(--mat-sys-brand-font-family);
+}
+
+.theme-primary-color {
+    color: var(--mat-sys-primary);
+}
+
+.theme-font-medium-size {
+    font-size: var(--mat-sys-body-medium-size);
+
+}
+
+.theme-font-large-size {
+    font-size: var(--mat-sys-body-large-size);
+}
+
+.no-margin {
+    margin: 0;
+}
+
+
+
+.fit-parent-hori {
+    width: 100%;
+}
+
+.fit-parent {
+    width: 100%;
+    height: 100%;
+
+}
+
+.fit-parent-vert {
+    height: 100%;
+}
+
+.see-through {
+    background: transparent;
+}
+
+.font {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.font-dark {
+    color: #f5fafb;
+}
+
+.main-background {
+    background: #f2f3fb;
+}
+
+
+.secondary {
+    color: lightblue;
+}
+
+
+.accent {
+    color: #62e3ae;
+}
+
+
+.hori-centered {
+    margin: auto;
+    width: fit-content;
+}
+
+html, body { height: 100%; }
+body { margin: 0; background-color: transparent; display: flex; }

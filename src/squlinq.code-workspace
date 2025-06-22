@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../devloop/devloop"
+		},
+		{
+			"path": "../../filmerse"
+		},
+		{
+			"path": "../../../nguaccts/nguaccts-fe"
+		}
+	],
+	"settings": {}
+}

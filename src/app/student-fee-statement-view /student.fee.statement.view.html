@@ -1,0 +1,68 @@
+<div fxLayout="column" fxLayoutAlign="start center" class="fit-parent" style="background-color: transparent;">
+    <div fxLayout="column" fxLayoutAlign="start stretch" style="background-color: transparent;">
+        <div fxLayout="row" fxLayoutAlign="space-around center" style="background-color: transparent;">
+            <h2>Fee Statement</h2>
+        </div>
+        <div fxLayout="row" *ngIf="vm && vm.student && vm.person" fxLayoutAlign="space-between"
+            style="background-color: transparent;" fxFlex>
+            <div fxLayout="column">
+                <p class="theme-font-medium-size no-margin">Admission Number</p>
+                <p class="theme-font-medium-size no-margin theme-primary-color">{{vm.student.admissionNumber}}</p>
+            </div>
+            <div fxLayout="column">
+                <p class="theme-font-medium-size no-margin">First Name</p>
+                <p class="theme-font-medium-size no-margin theme-primary-color">{{vm.person.firstName}}</p>
+            </div>
+            <div fxLayout="column">
+                <p class="theme-font-medium-size no-margin">Middle Name</p>
+                <p class="theme-font-medium-size no-margin theme-primary-color">{{vm.person.middleName}}</p>
+            </div>
+            <div fxLayout="column">
+                <p class="theme-font-medium-size no-margin">Surname</p>
+                <p class="theme-font-medium-size no-margin theme-primary-color">{{vm.person.surname}}</p>
+            </div>
+            <mat-icon color="primary" mat-button [matMenuTriggerFor]="create">more_vert</mat-icon>
+            <mat-menu #create="matMenu">
+                <!-- <button mat-menu-item [command]="vm.showFeeStatementComm">
+                    <p class="mat-caption">Show fee statement</p>
+                </button> -->
+            </mat-menu>
+        </div>
+        <mat-form-field *ngIf="vm" class="fee-accounts">
+            <mat-label>Fee Account</mat-label>
+            <mat-select [formControl]="feeAccountsCtrl" (selectionChange)="selectionChanged($event)">
+                <mat-option *ngFor="let t of vm.feeAccounts | async" [value]="t">{{t.description}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="selectedFeeAccount" style="overflow: visible;">
+            <table #table mat-table [dataSource]="selectedFeeAccount" class="mat-elevation-z8" style="width: 100%;" >
+                <ng-container *ngFor="let col of selectedFeeAccount.headersVm.columnNames; let colIndex = index"
+                    matColumnDef="{{col}}">
+                    <th mat-header-cell *matHeaderCellDef>{{col | fieldNameToSentCase }}</th>
+                    <td mat-cell *matCellDef="let element" style="background-color: transparent">
+                        <div [heightUpdater]="[element['heightPipe'], col]"  *ngIf="col != 'paid'" fxLayout="row" fxLayoutAlign="{{element['alignment'] || 'start center'}}" 
+                        style="background-color: transparent;">
+                            {{ element[col] }}</div>
+                        <div fxLayout="column" [heightUpdater]="[element['heightPipe'], col]" fxLayoutAlign="start stretch" *ngIf="col == 'paid'" style="background-color: transparent;">
+                            <p style="margin:0;" [matTooltip]="p.comment" *ngFor="let p of element['paymentEntries'] | async">{{ p['description'] }}</p>
+                            <p style="margin:0;text-decoration: underline;" >Total paid: {{ element['totalAmountPaid'] | async }}</p>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="selectedFeeAccount.headersVm.columnNames"></tr>
+                <tr mat-row *matRowDef="let row; columns: selectedFeeAccount.headersVm.columnNames;"></tr>
+            </table>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <p class="total-desc">Total Payable</p>
+                <p class="total-desc">{{ selectedFeeAccount.totalExpected | async }}</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <p class="total-desc">Total Paid</p>
+                <p class="total-desc">{{selectedFeeAccount.total | async}}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -29,9 +29,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
+              "src/custom_theme.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -91,6 +98,7 @@
               }
             ],
             "styles": [
+              "src/custom_theme.scss",
               "src/styles.scss"
             ],
             "scripts": []
