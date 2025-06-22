@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class Api
 {
-    PROTOCOL = 'http://';
+    PROTOCOL = 'https://';
 
-    URL: string = `${this.PROTOCOL}localhost:8000/api/v0`;
+    URL: string = `${this.PROTOCOL}squlinq.ddns.net/api/v0`;
 
     PERSON_URL = `${this.URL}/people`;
     
