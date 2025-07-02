@@ -217,7 +217,12 @@ export abstract class AbstractRepository<T extends Entity<T>> implements IReposi
     private checkLinks(r: any): string[]
     {
         let links = r['_links'];
-        return Streams.where(Streams.difference(new Set(this.links), new Set(this.optionalLinks)), p => !(p in links));
+        if(links)
+        {
+            return Streams.where(Streams.difference(new Set(this.links), new Set(this.optionalLinks)), p => !(p in links));
+
+        }
+        throw Error(`Response object expected to have a _links property. Response object is ${JSON.stringify(r)}`)
 
     }
 
